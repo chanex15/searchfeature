@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="page-content">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hello, Christian Paul P. Amantiad! It’s great to meet a passionate and dedicated web developer like you. Your expertise in HTML, CSS,<br>
+                and JavaScript, combined with your enthusiasm for learning new technologies, positions you perfectly to create innovative and<br>
+                user-friendly digital experiences. Your commitment to turning ideas into dynamic and responsive websites is truly commendable.</p>
+        </section>
+        <section id="education">
+            <h2>Education</h2>
+            <p>Bachelor of Science in Information Technology<br>
+            University of Science and Technology, 2026</p>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>HTML5 & CSS3</li>
+                <li>JavaScript & jQuery</li>
+                <li>Python & Django</li>
+                <li>Responsive Design</li>
+                <li>UI/UX Design>
+                <li>Git & GitHub</li>
+            </ul>
+        </section>
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <div class="portfolio-item">
+                <figure>
+                    <img src="ming.jpg" alt="Project 1">
+                    <figcaption>Project 1: SwapMate</figcaption>
+                </figure>
+                <p>SwapMate is a robust e-commerce platform designed exclusively for second-hand items, catering to students looking for affordable <br> 
+                    and discounted products. The website features a secure user authentication system, enabling students to create, manage, and <br>
+                    safeguard their accounts with ease. It offers detailed product listings, complete with high-quality images, comprehensive descriptions,<br>
+                    and transparent pricing, allowing users to effortlessly browse and discover items that meet their needs. The platform includes a fully <br>
+                    functional shopping cart system, supporting seamless addition, modification, and removal of products, along with a simplified and secure <br>
+                    checkout process. Built with a user-centric approach, SwapMate boasts a responsive and intuitive design, ensuring a smooth and enjoyable 
+                    <br>browsing experience across all devices. </p>
+            </div>
+        </section>
+        
+        <section id="subjects">
+            <h2>Subjects Taken</h2>
+            <input type="text" id="search-bar" placeholder="Search for a subject..." onkeyup="searchSubjects()">
+            <div id="subjects-list"></div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>If you'd like to get in touch, feel free to reach out via email or connect with me on LinkedIn.</p>
+            <ul class="contact-info">
+                <li>Email: Christianamantiad122@gmail.com</li>
+                <li>Github: <a href="https://github.com/chanex15" target="_blank">github.com/in/Chanex15</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Christian Paul P. Amantiad | All Rights Reserved</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("https://baldoklienedwind.github.io/PIT-1.-Adding-a-Search-Feature/courses.json")
+                .then(response => response.json())
+                .then(data => {
+                    const subjectsList = document.getElementById("subjects-list");
+    
+                    data.subjects.forEach(year => {
+                        let yearDiv = document.createElement("div");
+                        yearDiv.classList.add("subject-group");
+                        yearDiv.innerHTML = `<h3>${year.year} - ${year.semester}</h3><ul>`;
+                        
+                        year.courses.forEach(course => {
+                            yearDiv.innerHTML += `<li class="subject-item">${course}</li>`;
+                        });
+    
+                        yearDiv.innerHTML += `</ul>`;
+                        subjectsList.appendChild(yearDiv);
+                    });
+                })
+                .catch(error => console.error("Error loading subjects:", error));
+        });
+    
+        function searchSubjects() {
+            let input = document.getElementById("search-bar").value.toLowerCase();
+            let subjects = document.querySelectorAll(".subject-item");
+    
+            subjects.forEach(subject => {
+                if (subject.textContent.toLowerCase().includes(input)) {
+                    subject.style.display = "block";
+                } else {
+                    subject.style.display = "none";
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>
